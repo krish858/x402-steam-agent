@@ -1,0 +1,37 @@
+{
+  "manifest_version": 3,
+  "name": "x402-steam-agent",
+  "description": "Buy Steam games with crypto automatically. Checks cart, buys gift card via Bitrefill, and redeems it.",
+  "version": "1.0.0",
+
+  "action": {
+    "default_popup": "index.html"
+  },
+
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["https://store.steampowered.com/cart*"],
+      "js": ["content/steamCartReader.js"],
+      "run_at": "document_end"
+    }
+  ],
+
+  "permissions": [
+    "storage",
+    "tabs",
+    "activeTab",
+    "scripting",
+    "notifications"
+  ],
+
+  "host_permissions": [
+    "https://store.steampowered.com/*",
+    "https://api.bitrefill.com/*",
+    "https://your-backend.example.com/*"
+  ]
+}
